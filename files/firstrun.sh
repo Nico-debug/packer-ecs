@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+sudo su
+
 # Configure ECS Agent
 echo "ECS_CLUSTER=${ECS_CLUSTER}" > /etc/ecs/ecs.config
 if [ -n $ECS_INSTANCE_ATTRIBUTES ]; then
@@ -42,22 +44,26 @@ state_file = /var/lib/awslogs/agent-state
 file = /var/log/dmesg
 log_group_name = ${STACK_NAME}/ec2/${AUTOSCALING_GROUP}/var/log/dmesg
 log_stream_name = {instance_id}
+
 [/var/log/messages]
 file = /var/log/messages
 log_group_name = ${STACK_NAME}/ec2/${AUTOSCALING_GROUP}/var/log/messages
 log_stream_name = {instance_id}
 datetime_format = %b %d %H:%M:%S
+
 [/var/log/docker]
 file = /var/log/docker
 log_group_name = ${STACK_NAME}/ec2/${AUTOSCALING_GROUP}/var/log/docker
 log_stream_name = {instance_id}
 datetime_format = %Y-%m-%dT%H:%M:%S.%f
+
 [/var/log/ecs/ecs-init.log]
 file = /var/log/ecs/ecs-init.log*
 log_group_name = ${STACK_NAME}/ec2/${AUTOSCALING_GROUP}/var/log/ecs/ecs-init
 log_stream_name = {instance_id}
 datetime_format = %Y-%m-%dT%H:%M:%SZ
 time_zone = UTC
+
 [/var/log/ecs/ecs-agent.log]
 file = /var/log/ecs/ecs-agent.log*
 log_group_name = ${STACK_NAME}/ec2/${AUTOSCALING_GROUP}/var/log/ecs/ecs-agent

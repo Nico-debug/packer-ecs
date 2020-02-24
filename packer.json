@@ -12,44 +12,44 @@
       "secret_key": "{{user `aws_secret_access_key`}}",
       "token": "{{user `aws_session_token`}}",
       "region": "ap-northeast-1",
-      "source_ami": "ami-0cdf0c91f1d10e38e",
+      "source_ami": "ami-0b07a6e4735fb50c9",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
       "associate_public_ip_address": "true",
       "ami_name": "docker-production-aws-ecs-base {{timestamp}}",
       "tags": {
-        "Name": "Docker ProductionAWS ECS Base Image",
-        "SourceAMI": "ami-0cdf0c91f1d10e38e",
+        "Name": "Docker Production AWS ECS Base Image",
+        "SourceAMI": "ami-0b07a6e4735fb50c9",
         "DockerVersion": "18.09.9-ce",
-        "ECSAgentVersion": "1.35.0"
+        "ECSAgentVersion": "1.36.2"
       }
     }
   ],
   "provisioners": [
-      
-      {
-        "type": "shell",
-        "script": "scripts/install-os-packages.sh"
-      },
-      {
-        "type": "shell",
-        "script": "scripts/cloud-init-options.sh"
-      },
-      {
-        "type": "shell",
-        "script": "scripts/cleanup.sh"
-      },
-      {
-        "type": "file",
-        "source": "files/firstrun.sh",
-        "destination": "/home/ec2-user/firstrun.sh"
-      }
-    ],
-    "post-processors": [
-      {
-        "type": "manifest",
-        "output": "manifest.json",
-        "strip_path": true
-      }
-    ]
+
+    {
+      "type": "shell",
+      "script": "scripts/install-os-packages.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/cloud-init-options.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/cleanup.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/firstrun.sh",
+      "destination": "/home/ec2-user/firstrun.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
+  ]
 }
