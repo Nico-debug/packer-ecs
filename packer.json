@@ -27,6 +27,7 @@
   ],
   "provisioners": [
 
+
     {
       "type": "shell",
       "script": "scripts/install-os-packages.sh"
